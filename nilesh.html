@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+</head>
+<body>
+<section class="container mt-5">
+	<div class="select_box">
+		<select class="form-control form-control-sm append_options select1">
+		  <option>Chose Country</option>
+		</select>
+	</div>
+	<div class="mt=5 selected_val" style="margin-top: 50px;">
+		
+	</div>
+</section>
+
+
+
+<script>
+	$( document ).ready(function() {
+	    $.ajax({url: "https://raw.githubusercontent.com/khkwan0/countryCityStateJson/master/lib/compiledCities.json", 
+	    	success: function(result)
+	    	{
+			    //console.log(result);
+			    showData(result);
+		  
+		  }});
+	});
+
+
+	function showData(data)
+	{
+		var obj = JSON.parse(data);
+		var text = "";
+		$.each(obj, function(key,val) {             
+            //console.log(val.name);   
+            var name =  val.name.toString();
+            text = text+"<option value = "+name+">"+ name +"</option>";
+
+
+        }); 
+
+        $(".append_options").append(text);
+		
+	}
+
+
+	$('.select1').change(function () { 
+ 			$(".country_box").remove();
+ 		var Country = $(this).val();	
+		console.log(`selected value is ${Country}`);
+		$(".selected_val").append("<div class='country_box'> <h1> Selected Country is "+Country+"</div>");
+
+	});
+ 
+
+</script>
+</body>
+</html>
