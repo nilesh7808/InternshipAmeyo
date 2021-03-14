@@ -1,1 +1,1 @@
-# InternshipAmeyo
+# AssignmentsAmeyo
